@@ -1,6 +1,6 @@
 # Personal Fork
 
-This fork adds multi-tenancy based on the authed user
+This fork adds multi-tenancy based on the user
 
 # Add tags and taggable behaviour to a Laravel app
 
