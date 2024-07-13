@@ -164,11 +164,11 @@ trait HasTags
         return $this->tags->filter(fn (Tag $tag) => $tag->type === $type);
     }
 
-    public function attachTags(array | ArrayAccess | Tag $tags, string $type = null): static
+    public function attachTags(int $user_id, array | ArrayAccess | Tag $tags, string $type = null): static
     {
         $className = static::getTagClassName();
 
-        $tags = collect($className::findOrCreate($tags, $type));
+        $tags = collect($className::findOrCreate($user_id, $tags, $type));
 
         $this->tags()->syncWithoutDetaching($tags->pluck('id')->toArray());
 
