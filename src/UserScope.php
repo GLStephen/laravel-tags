@@ -21,7 +21,7 @@ class UserScope implements Scope
         if (Auth::hasUser() && Auth::user()->role === 'something') {
             $builder->where('user_id', '=', Auth::user()->id);
         }else{
-            $builder->where('user_id', '=', '');
+            $builder->where('user_id', '=', 0);
         }
     }
 }
