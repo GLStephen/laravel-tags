@@ -28,6 +28,14 @@ class Tag extends Model implements Sortable
         return app()->getLocale();
     }
 
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new UserScope);
+    }
+
     public function scopeWithType(Builder $query, string $type = null): Builder
     {
         if (is_null($type)) {
