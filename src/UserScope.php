@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Scopes;
+namespace Spatie\Tags;
 
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class UserScopeForSalesContactAdmin implements Scope
+class UserScope implements Scope
 {
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -18,7 +18,9 @@ class UserScopeForSalesContactAdmin implements Scope
     public function apply(Builder $builder, Model $model)
     {
         if (Auth::hasUser() && Auth::user()->role === 'something') {
-            $builder->where('foo', '=', 'something from currently logged in user');
+            $builder->where('user_id', '=', Auth::user()->id);
+        }else{
+            $builder->where('user_id', '=', '');
         }
     }
 }
