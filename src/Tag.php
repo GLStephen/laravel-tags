@@ -53,16 +53,17 @@ class Tag extends Model implements Sortable
     }
 
     public static function findOrCreate(
+        int $user_id,
         string | array | ArrayAccess $values,
         string | null $type = null,
         string | null $locale = null,
     ): Collection | Tag | static {
-        $tags = collect($values)->map(function ($value) use ($type, $locale) {
+        $tags = collect($values)->map(function ($value) use ($user_id, $type, $locale) {
             if ($value instanceof self) {
                 return $value;
             }
 
-            return static::findOrCreateFromString($value, $type, $locale);
+            return static::findOrCreateFromString($user_id, $value, $type, $locale);
         });
 
         return is_string($values) ? $tags->first() : $tags;
@@ -96,7 +97,7 @@ class Tag extends Model implements Sortable
             ->get();
     }
 
-    public static function findOrCreateFromString(string $name, string $type = null, string $locale = null)
+    public static function findOrCreateFromString(int $user_id, string $name, string $type = null, string $locale = null)
     {
         $locale = $locale ?? static::getLocale();
 
@@ -104,6 +105,7 @@ class Tag extends Model implements Sortable
 
         if (! $tag) {
             $tag = static::create([
+                'user_id' => $user_id,
                 'name' => [$locale => $name],
                 'type' => $type,
             ]);
