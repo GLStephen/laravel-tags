@@ -1,3 +1,7 @@
+# Personal Fork
+
+This fork adds multi-tenancy based on the authed user
+
 # Add tags and taggable behaviour to a Laravel app
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-tags.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-tags)
