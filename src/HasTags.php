@@ -164,7 +164,7 @@ trait HasTags
         return $this->tags->filter(fn (Tag $tag) => $tag->type === $type);
     }
 
-    public function attachTags(int $user_id, array | ArrayAccess | Tag $tags, string $type = null): static
+    public function attachTags(c array | ArrayAccess | Tag $tags, string $type = null): static
     {
         $className = static::getTagClassName();
 
@@ -196,7 +196,7 @@ trait HasTags
         return $this->detachTags([$tag], $type);
     }
 
-    public function syncTags(string | array | ArrayAccess $tags): static
+    public function syncTags(int $user_id, string | array | ArrayAccess $tags): static
     {
         if (is_string($tags)) {
             $tags = Arr::wrap($tags);
@@ -204,7 +204,7 @@ trait HasTags
 
         $className = static::getTagClassName();
 
-        $tags = collect($className::findOrCreate($tags));
+        $tags = collect($className::findOrCreate($user_id, $tags));
 
         $this->tags()->sync($tags->pluck('id')->toArray());
 
