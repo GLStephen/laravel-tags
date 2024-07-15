@@ -164,7 +164,7 @@ trait HasTags
         return $this->tags->filter(fn (Tag $tag) => $tag->type === $type);
     }
 
-    public function attachTags(c array | ArrayAccess | Tag $tags, string $type = null): static
+    public function attachTags(int $user_id, array | ArrayAccess | Tag $tags, string $type = null): static
     {
         $className = static::getTagClassName();
 
